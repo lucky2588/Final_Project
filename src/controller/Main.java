@@ -17,6 +17,10 @@ public class Main {
         user.setAccount(new Account("user","123","user"));
         //tạo 3 thuộc tính của Manager
         ArrayList<Room> listRoom = new ArrayList<>();
+        Room room1 = new Room();room1.setPrinceRoom(1000);listRoom.add(room1);
+        Room room2 = new Room();room2.setPrinceRoom(8500);listRoom.add(room2);
+
+
         ArrayList<Renters> listRenters = new ArrayList<>();listRenters.add(user);
         ArrayList<Contract> listContract = new ArrayList<>();
         manager.setListRenters(listRenters);

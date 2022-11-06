@@ -1,15 +1,12 @@
 package view;
-
 import model.*;
-
 import java.util.ArrayList;
 import java.util.Scanner;
-
 public class ViewRenters {
-    public ViewRenters() {
-    }
-
-    public void display(Scanner sc, Renters user, ArrayList<Room> listRoom, ManagerHome manager) {
+    public ViewRenters() {}
+    public void display(Scanner sc, Renters user, ArrayList<Room> listRoom, ManagerHome manager){
+        RentersModel rentersModel = new RentersModel();
+        ManagerHomeModel managerHomeModel = new ManagerHomeModel();
         System.out.println("....Please Wait for us a moment");
         System.out.println("Welcome " + user.getFullName());
         System.out.println("You Are logged in as User");
@@ -20,8 +17,8 @@ public class ViewRenters {
             boolean checkEx = true;
             while (checkEx){
                 try {
-                    System.out.println("1.Change Personal Information\t\t\t\t\t\t2.See Information of Manager Home\t\t\t\t\t\t3.Look Room Based On Price \t\t\t\t4.Look For Room based on Rank");
-                    System.out.println("\t\t\t\t\t5.In the Compound Room \t\t\t\t\t 6.See Contract\t\t\t\t\t7.See Bill of Month \t\t\t\t\t\t8.Log Out ");
+                    System.out.println("1.Change Personal Information\t\t\t\t\t\t2.See Information of Manager Home\t\t\t\t\t\t3.Look for Room base on Request of You  \t\t\t\t4.See Room base on Rating Criteria");
+                    System.out.println("\t\t\t\t\t5.Room Registration\t\t\t\t\t 6.See Contract\t\t\t\t\t7.See Bill of Month \t\t\t\t\t\t8.Log Out ");
                     System.out.println("=>> Your Choose");
                     choose = Integer.parseInt(sc.nextLine());
                     checkEx = false;
@@ -31,15 +28,16 @@ public class ViewRenters {
             }
             switch (choose) {
                 case 1:
+                         rentersModel.changleInfor(sc,user);
                     System.out.println("...........Back to home screen");
                     break;
-                case 2:
+                case 2: // chức năng xem thông tin của Chủ trọ
                     System.out.println("Information About People Home Manager");
                     System.out.println(manager.toString());
                     System.out.println("...........Back to home screen");
                     break;
-                case 3:
-                    System.out.println("...........Back to home screen");
+                case 3: // Chức năng tìm phòng theo yêu cầu
+                     managerHomeModel.displayRoom(sc,manager);
                     break;
                 case 4:
                     System.out.println("...........Back to home screen");

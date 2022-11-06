@@ -1,13 +1,22 @@
 package model;
 public class Renters extends Person{
     private Room room;
-    private Contract hopDong;
     private int id;
     private static int nextId = 100;
+    private String statusRoom;
 
     public Renters(){
+        statusRoom ="null";
         nextId++;
         this.id = nextId;
+    }
+
+    public String getStatusRoom() {
+        return statusRoom;
+    }
+
+    public void setStatusRoom(String statusRoom) {
+        this.statusRoom = statusRoom;
     }
 
     public Renters(int cCCD, String fullName, int numberPhone, String address){
@@ -22,12 +31,8 @@ public class Renters extends Person{
         this.room = room;
     }
 
-    public Contract getHopDong() {
-        return hopDong;
-    }
-
-    public void setHopDong(Contract hopDong){
-        this.hopDong = hopDong;
+    public int getId() {
+        return id;
     }
 
     @Override
