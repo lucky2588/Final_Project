@@ -17,18 +17,17 @@ public class Main {
         user.setAccount(new Account("user","123","user"));
         //tạo 3 thuộc tính của Manager
         ArrayList<Room> listRoom = new ArrayList<>();
-        Room room1 = new Room();room1.setPrinceRoom(1);listRoom.add(room1);room1.setRankRoom("A");
-        Room room2 = new Room();room2.setPrinceRoom(8.5);listRoom.add(room2);room2.setRankRoom("B");
-
-
+//        Room room1 = new Room();room1.setPrinceRoom(1);listRoom.add(room1);room1.setRankRoom("A");
+//        Room room2 = new Room();room2.setPrinceRoom(8.5);listRoom.add(room2);room2.setRankRoom("B");
         ArrayList<Renters> listRenters = new ArrayList<>();listRenters.add(user);
         ArrayList<Contract> listContract = new ArrayList<>();
         manager.setListRenters(listRenters);
-        manager.setListContract(listContract);
         manager.setListRoom(listRoom); // add thuộc tính của Manager .. manager được quyền quản lí tất cả các phòng , những người thuê và cả hợp đồng
         listUser.add(admin);listUser.add(manager);listUser.add(user); // Set 3 loại role vào 1 tài khoản
         ViewMain viewMain = new ViewMain();
         viewMain.display(sc,listUser,listRenters,manager,listManager,listRoom,listContract);
+
+
 
 
 

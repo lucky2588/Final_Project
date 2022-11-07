@@ -1,5 +1,4 @@
 package model;
-
 public class Bill {
     private double princeRoom;
     private double princeElectricity;
@@ -7,12 +6,15 @@ public class Bill {
 
     public Bill(){
     }
+    public Bill(double princeRoom){
+        this.princeRoom = princeRoom;
+    }
 
-    public double getPrinceRoom() {
+    public double getPrinceRoom(){
         return princeRoom;
     }
 
-    public void setPrinceRoom(double princeRoom) {
+    public void setPrinceRoom(double princeRoom){
         this.princeRoom = princeRoom;
     }
 

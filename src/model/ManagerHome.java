@@ -5,7 +5,6 @@ import java.util.ArrayList;
 public class ManagerHome extends Person{
     private ArrayList<Room> listRoom;
     private ArrayList<Renters> listRenters;
-    private ArrayList<Contract> listContract;
 
     public ManagerHome(int cCCD, String fullName, int numberPhone, String address, Account account){
         super(cCCD, fullName, numberPhone, address, account);
@@ -27,13 +26,7 @@ public class ManagerHome extends Person{
         this.listRenters = listRenters;
     }
 
-    public ArrayList<Contract> getListContract() {
-        return listContract;
-    }
 
-    public void setListContract(ArrayList<Contract> listContract) {
-        this.listContract = listContract;
-    }
 
     @Override
     public String toString() {

@@ -1,11 +1,7 @@
 package model;
-
 import java.util.Scanner;
-
 public class ManagerHomeModel {
-    public ManagerHomeModel() {
-    }
-
+    public ManagerHomeModel() {}
     public void displayRoom(Scanner sc, ManagerHome manager) { // Xử lí Case 3
         boolean check = true;
         endProCase3:
@@ -31,6 +27,7 @@ public class ManagerHomeModel {
                     roomBaseRank(sc,manager);
                     break;
                 case 3:
+                    roomBaseArea(sc, manager);
                     break;
                 case 4:
                     break endProCase3;
@@ -59,7 +56,7 @@ public class ManagerHomeModel {
             }
             System.out.println("Please wait for us for a few minutes");
             for (int i = 0; i < manager.getListRoom().size(); i++) {
-                if (manager.getListRoom().get(i).getPrinceRoom() >= (choose - (choose / 2.0))) {
+                if (manager.getListRoom().get(i).getPrinceRoom() >= (choose - (choose / 1.5))) {
                     System.out.println(manager.getListRoom().get(i).toString());
                 } else {
                     if (i < manager.getListRoom().size() - 1)
@@ -129,8 +126,7 @@ public class ManagerHomeModel {
                         if(checkRankB.equals(manager.getListRoom().get(i).getRankRoom())){
                             System.out.println(manager.getListRoom().get(i));
                         }else{
-                            if(i < manager.getListRoom().size()-1)
-                                continue;
+                            if(i > manager.getListRoom().size()-2)
                             System.out.println("This Home have not Room rank B ");
                         }
                     }
@@ -175,6 +171,56 @@ public class ManagerHomeModel {
             }
         }
     }
+    // Case 3.3 :
+    public void roomBaseArea(Scanner sc , ManagerHome manager){
+        boolean check = true;
+       endPro: while (check){
+            double choose = 0.0;
+            boolean checkEx= true;
+            while (checkEx){
+                try{
+                    System.out.println("Are you Want Room have Area ? \n Import here:");
+                    choose = Double.parseDouble(sc.nextLine());
+                    checkEx = false;
+                }catch (Exception ex){
+                    System.out.println("You have entered wrong Input data type, please re-enter it");
+                }
+            }
+            System.out.println("Wait for us a moment....");
+            for (int i = 0; i <manager.getListRoom().size() ; i++){
+                if(manager.getListRoom().get(i).getAreaRoom() >= choose){
+                    System.out.println(manager.getListRoom().get(i).toString());
+                }else{
+                    if(i < manager.getListRoom().size()-1)
+                        continue;
+                    System.out.println(" There is no room for you");
+                }
+            }
+            boolean checkEx2 = true;
+            int choose1 =0;
+            while (checkEx2){
+                try{
+                    System.out.println("Do you Want Continue look for Room base on Area ? \n 1.Continue  \t\t\t 2.Exit");
+                    choose1 = Integer.parseInt(sc.nextLine());
+                    checkEx2 = false;
+                }catch (Exception ex){
+                    System.out.println("You have entered wrong Input data type, please re-enter it");
+                }
+            }
+            switch (choose1){
+                case 1:
+                    break;
+                case 2:
+                    System.out.println("...........Back to home screen");
+                    break endPro;
+                default:
+                    System.out.println("Import Numbers Olther !! ");
+                    break;
+            }
+        }
+    }
+    // Xong chức năng Case 3 in Sreen Main User....
+
 
 
 

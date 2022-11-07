@@ -10,8 +10,18 @@ public class Room {
     private String rankRoom;
     private Bill billRoom;
     private String describeRoom;
+
+    public Contract getContract() {
+        return contract;
+    }
+
+    public void setContract(Contract contract) {
+        this.contract = contract;
+    }
+
     private ArrayList<Renters> UserAtRoom;
     private ArrayList<Renters> listRegister;
+    private Contract contract;
 
     public Room(){
         nextRoomNumber++;
@@ -74,8 +84,8 @@ public class Room {
 
     @Override
     public String toString() {
-        return "\n-Room : "+getRoomNumber()+"\t\t-Area : "+getAreaRoom()+
-                "\t\t-Describe : "+getDescribeRoom()+"\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t=>>Rank : "+getRankRoom()+"\t\t -Prince Room : "+getPrinceRoom()+"K";
+        return "\n-Room : "+getRoomNumber()+"\t\t-Area : "+getAreaRoom()+"m2"+
+                "\t\t-Describe : "+getDescribeRoom()+"\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t=>>Rank : "+getRankRoom()+"\t\t -Prince Room : "+getPrinceRoom()+"000K";
     }
 
 
