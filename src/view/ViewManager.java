@@ -1,10 +1,14 @@
 package view;
+
 import model.*;
+
 import java.util.ArrayList;
 import java.util.Scanner;
+
 public class ViewManager {
     public ViewManager() {
     }
+
     public void display(Scanner sc, ManagerHome manager, ArrayList<Renters> listRenters, ArrayList<Room> listRoom, ArrayList<Contract> listContract) {
         ManagerHomeModel managerHomeModel = new ManagerHomeModel();
         RoomModel roomModel = new RoomModel();
@@ -32,8 +36,14 @@ public class ViewManager {
                     System.out.println("...........Back to home screen");
                     break;
                 case 2:
-                    for (int i = 0; i <manager.getListRoom().size() ; i++) {
-                        System.out.println(manager.getListRoom().get(i).getListRegister());
+                    for (int i = 0; i < manager.getListRoom().size(); i++) {
+                        if (!manager.getListRoom().get(i).getListRegister().isEmpty()) {
+                            dangkyPhong(sc, manager, roomModel);
+                        } else {
+                            if(i < manager.getListRoom().size()-1)
+                                continue;
+                            System.out.println("No one register Room of You ");
+                        }
                     }
                     System.out.println("...........Back to home screen");
                     break;
@@ -59,7 +69,8 @@ public class ViewManager {
     // case 1 in SreenMain Manager
     public void caseOne(Scanner sc, ManagerHome manager, RoomModel roomModel) {
         boolean check = true;
-       endPro: while (check) {
+        endPro:
+        while (check) {
             int choose = 0;
             boolean checkEx = true;
             while (checkEx) {
@@ -75,7 +86,7 @@ public class ViewManager {
                 case 1:
                     boolean flag = true;
                     endPro1:
-                    while (flag){
+                    while (flag) {
                         Room room = new Room();
                         roomModel.creatRoom(sc, room);
                         manager.getListRoom().add(room);
@@ -110,6 +121,63 @@ public class ViewManager {
                     break endPro;
                 default:
                     System.out.println("Import numbers Olther !!! ");
+            }
+        }
+    }
+    //Xử lí case 1.2 : Update Room
+    // xử lí Case 1.3 : Xóa Room
+
+    // Xử lí Case 2 : Chấp nhận cho user join phòng
+    public void dangkyPhong(Scanner sc, ManagerHome manager, RoomModel roomModel) {
+        System.out.println("List Room have People register .. ");
+        System.out.println("Room\t\t\tList People Register ");
+        for (int i = 0; i < manager.getListRoom().size(); i++) { // duyệt phần tử
+            if (!manager.getListRoom().get(i).getListRegister().isEmpty())
+                System.out.println(manager.getListRoom().get(i).getRoomNumber() + "\t\t\t\t\t\t" + manager.getListRoom().get(i).getListRegister().size());
+        }
+        boolean flag = true;
+        endPro:
+        while (flag) {
+            int checkIdRoom = 0;
+            boolean checkEx = true;
+            while (checkEx) {
+                try {
+                    System.out.println("Import ID Room that You Want See list Register for the living room");
+                    checkIdRoom = Integer.parseInt(sc.nextLine());
+                    checkEx = false;
+                } catch (Exception ex) {
+                    System.out.println("You have entered wrong Input data type, please re-enter it");
+                }
+            }
+            for (int i = 0; i < manager.getListRoom().size(); i++) {
+                if (manager.getListRoom().get(i).getRoomNumber() == checkIdRoom) {
+                    roomModel.addRegisterJoinRoom(sc, manager, manager.getListRoom().get(i));
+                    break;
+                } else {
+                    if (i < manager.getListRoom().size() - 1)
+                        continue;
+                    System.out.println("You entered the wrong room number, please Rs Input");
+                }
+            }
+            boolean checkEx2 = true;
+            int choose2 = 0;
+            while (checkEx2) {
+                try {
+                    System.out.println("Do You Want Continue ? \n1.Continue \t\t 2.Exit\nInput Here:");
+                    choose2 = Integer.parseInt(sc.nextLine());
+                    checkEx2 = false;
+                } catch (Exception ex) {
+                    System.out.println("You Have Entered Wrong Input data type, please re-enter it");
+                }
+            }
+            switch (choose2) {
+                case 1:
+                    break;
+                case 2:
+                    break endPro;
+                default:
+                    System.out.println("Import Numbers Olther !!! ");
+                    break;
             }
         }
     }
