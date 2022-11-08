@@ -1,14 +1,10 @@
 package view;
-
 import model.*;
-
 import java.util.ArrayList;
 import java.util.Scanner;
-
 public class ViewManager {
     public ViewManager() {
     }
-
     public void display(Scanner sc, ManagerHome manager, ArrayList<Renters> listRenters, ArrayList<Room> listRoom, ArrayList<Contract> listContract) {
         ManagerHomeModel managerHomeModel = new ManagerHomeModel();
         RoomModel roomModel = new RoomModel();
@@ -36,6 +32,9 @@ public class ViewManager {
                     System.out.println("...........Back to home screen");
                     break;
                 case 2:
+                    for (int i = 0; i <manager.getListRoom().size() ; i++) {
+                        System.out.println(manager.getListRoom().get(i).getListRegister());
+                    }
                     System.out.println("...........Back to home screen");
                     break;
                 case 3:

@@ -88,9 +88,9 @@ public class Contract {
                 +"\nDia Chi : 125 Luong The Vinh , Q.Thanh Xuan\n"+"Ngay Sinh : 29/10/2001"+"\n \t\t\t\t\t\t========Dieu Kien Hop Dong======="+""+
                 "\n1.Dat Coc 1 Thang Tien Nha \n2.Thanh Toan Day Du Tien Nha vao mung 5 hang Thang \n3.Giu Gin Do Dac Chung (thang may , cau thang ,...)" +
                 "\n4.Ơ toi thieu it nhat 1 nam ke tu khi lam hop dong"+
-                "\t\t\t\t=====Chi Phi Dich Vu khi SD phong======"
-                +"-Tien Nha : "+getPriceRoom()+"\n-Wifi : 100k/Phong \n-Tien Nuoc : 25k/Khoi \n-Tien Dien : 3.5k/So (Dung Tren 50 So =>> 4k/So)"+
-                "\n Dai Dien ben cho Thue \nNguyen Duc Thang";
+                "\n\n\t\t\t\t=====Chi Phi Dich Vu khi SD phong======"
+                +"\n-Tien Nha : "+getPriceRoom()+"\n-Wifi : 100k/Phong \n-Tien Nuoc : 25k/Khoi \n-Tien Dien : 3.5k/So (Dung Tren 50 So =>> 4k/So)"+
+                "\n\n\t\t\tDai Dien ben cho Thue \n\t\t\tNguyen Duc Thang";
     }
 
 

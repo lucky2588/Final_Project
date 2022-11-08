@@ -1,4 +1,5 @@
 package model;
+import java.util.ArrayList;
 import java.util.Scanner;
 public class RoomModel{
     public RoomModel(){}
@@ -31,6 +32,14 @@ public class RoomModel{
         Contract contract = new Contract(room.getRoomNumber(),room.getPrinceRoom());
         room.setContract(contract);
         System.out.println("Add a new room successfully");
+    }
+    // tạo phương thức check xem User đã có trong danh sách đăng kí hay chưa
+    public boolean checkListRegister(Renters user, Room room ){
+        for (Renters user1 : room.getListRegister()){
+            if(user1 == user)
+                return true;
+        }
+        return false;
     }
 
 }

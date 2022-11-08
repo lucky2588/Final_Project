@@ -1,5 +1,4 @@
 package controller;
-
 import model.*;
 import view.ViewMain;
 import java.util.ArrayList;
@@ -14,6 +13,7 @@ public class Main {
         admin.setListUser(listUser);
         ManagerHome manager = new ManagerHome(1000, "Nguyen Duc Thang", 8386, "Ha Noi", new Account("123", "123", "manager"));
         Renters user= new Renters(2000,"Dat",033,"Ha Noi");
+        user.setStatusRoom("null");
         user.setAccount(new Account("user","123","user"));
         //tạo 3 thuộc tính của Manager
         ArrayList<Room> listRoom = new ArrayList<>();

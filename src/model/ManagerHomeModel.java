@@ -1,8 +1,42 @@
 package model;
 import java.util.Scanner;
 public class ManagerHomeModel {
-    public ManagerHomeModel() {}
-    public void displayRoom(Scanner sc, ManagerHome manager) { // Xử lí Case 3
+    public ManagerHomeModel(){}
+    public void displayRoom(Scanner sc, ManagerHome manager){
+        boolean flag = true;
+        endPro:while (flag){
+            int choose = 0;
+            boolean checkEx = true;
+            while (checkEx){
+                try{
+                    System.out.println("Look for Room base On ? \n 1.Your Resquet \t\t 2.List Sort \t\t3.Exit\n=>>import here:");
+                    choose = Integer.parseInt(sc.nextLine());
+                    checkEx = false;
+                }catch (Exception ex){
+                    System.out.println("You have entered wrong Input data type, please re-enter it");
+                }
+            }
+            switch (choose){
+                case 1:
+                    displayRoom1(sc,manager);
+                    break;
+                case 2:
+                    //Chưa xử lí
+                    break;
+                case 3:
+                    System.out.println("...........Back to home screen");
+                    break endPro;
+                case 4:
+                    System.out.println("Import olther number !!!! ");
+                    System.out.println("...........Back to home screen");
+                    break;
+            }
+        }
+    }
+
+
+    // Case 3.1
+    public void displayRoom1(Scanner sc, ManagerHome manager) { // Xử lí Case 3
         boolean check = true;
         endProCase3:
         while (check) {

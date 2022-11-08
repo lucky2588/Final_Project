@@ -1,7 +1,5 @@
 package model;
-
 import java.util.ArrayList;
-
 public class Room {
     private int roomNumber;
     private static int nextRoomNumber = 100;
@@ -10,24 +8,25 @@ public class Room {
     private String rankRoom;
     private Bill billRoom;
     private String describeRoom;
+    private ArrayList<Renters> userAtRoom;
+    private ArrayList<Renters> listRegister;
+    private Contract contract;
 
     public Contract getContract() {
         return contract;
     }
-
     public void setContract(Contract contract) {
         this.contract = contract;
     }
 
-    private ArrayList<Renters> UserAtRoom;
-    private ArrayList<Renters> listRegister;
-    private Contract contract;
 
     public Room(){
         nextRoomNumber++;
         this.roomNumber = nextRoomNumber;
          ArrayList<Renters> listAtRoom = new ArrayList<>();
          ArrayList<Renters> listUserRegister = new ArrayList<>();
+         this.listRegister = listUserRegister;
+         this.userAtRoom = listAtRoom;
     }
 
     public void setAreaRoom(double areaRoom) {
@@ -75,7 +74,7 @@ public class Room {
     }
 
     public ArrayList<Renters> getUserAtRoom() {
-        return UserAtRoom;
+        return userAtRoom;
     }
 
     public ArrayList<Renters> getListRegister() {
@@ -85,7 +84,7 @@ public class Room {
     @Override
     public String toString() {
         return "\n-Room : "+getRoomNumber()+"\t\t-Area : "+getAreaRoom()+"m2"+
-                "\t\t-Describe : "+getDescribeRoom()+"\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t=>>Rank : "+getRankRoom()+"\t\t -Prince Room : "+getPrinceRoom()+"000K";
+                "\t\t-Describe : "+getDescribeRoom()+"\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t=>>Rank : "+getRankRoom()+"\t\t -Prince Room : "+getPrinceRoom()+"00K";
     }
 
 
