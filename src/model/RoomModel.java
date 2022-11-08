@@ -33,6 +33,7 @@ public class RoomModel {
         room.setPrinceRoom(princeRoom);
         room.setAreaRoom(areaRoom);
         room.setDescribeRoom(describeRoom);
+        room.getBillRoom().setPrinceRoom(princeRoom);
         Contract contract = new Contract(room.getRoomNumber(), room.getPrinceRoom());
         room.setContract(contract);
         System.out.println("Add a new room successfully");
@@ -46,18 +47,20 @@ public class RoomModel {
         }
         return false;
     }
+
     // Phương thức thêm mới 1 user vào phòng
     public void addRegisterJoinRoom(Scanner sc, ManagerHome manager, Room room) {
         boolean flag = true;
-        int checkCCCD=0;
-        endPro:while (flag){
+        int checkCCCD = 0;
+        endPro:
+        while (flag) {
             System.out.println("======List People Register this Room=====");
             System.out.println("fullName \t\t\t Username \t\t\tCCCD");
             for (int i = 0; i < room.getListRegister().size(); i++) {
-                System.out.println(room.getListRegister().get(i).getFullName() + "\t\t\t\t" + room.getListRegister().get(i).getAccount().getUserName() + "\t\t\t" + room.getListRegister().get(i).getcCCD());
+                System.out.println(room.getListRegister().get(i).getFullName() + "\t\t\t\t" + room.getListRegister().get(i).getAccount().getUserName() + "\t\t\t\t\t" + room.getListRegister().get(i).getcCCD());
             }
-               boolean checkEx =true;
-            while (checkEx){
+            boolean checkEx = true;
+            while (checkEx) {
                 try {
                     System.out.println("Import ID/CCCD of People that You agree to join this Room !!!,input here:");
                     checkCCCD = Integer.parseInt(sc.nextLine());
@@ -66,40 +69,42 @@ public class RoomModel {
                     System.out.println("You have entered wrong Input data type, please re-enter it");
                 }
             }
-
-                for (int i = 0; i <room.getListRegister().size(); i++){
-                    if(checkCCCD == room.getListRegister().get(i).getcCCD()){
-                        manager.getListRenters().get(i).setRoom(room); // set phòng cho user
-                        System.out.println("Add"+manager.getListRenters().get(i).getFullName()+" this Room "+room.getRoomNumber()+"Successful");
-                        manager.getListRenters().get(i).setStatusRoom("Full"); // đổi trạng thái cho user
-                        room.getUserAtRoom().add(manager.getListRenters().get(i)); // thêm user vào danh sách phòng
-                        room.getContract().inputDayContract(sc, room.getContract()); // Làm hợp động cho user
-                        System.out.println("\t\t\t\t\t\t=======Contract of two Parties========");
-                        System.out.println(room.getContract().toString(manager.getListRenters().get(i)));
-                        for (int j = 0; j <manager.getListRoom().size() ; j++){
-                            manager.getListRoom().get(j).getListRegister().remove(manager.getListRenters().get(i));
-                        }
-                        break;
-                    }else{
-                      if(i < room.getListRegister().size()-2)
-                          continue;
+                int checkFor = 0;
+            for (int i = 0; i < room.getListRegister().size(); i++) {
+                if (checkCCCD == room.getListRegister().get(i).getcCCD()){
+                    checkFor+=1;
+                    room.getListRegister().get(i).setRoom(room); // set phòng cho user
+                    System.out.println("");
+                    System.out.println("Add\t" +room.getListRegister().get(i).getFullName() + " this Room " + room.getRoomNumber() + "\tSuccessful");
+                    room.getListRegister().get(i).setStatusRoom("Full"); // đổi trạng thái cho user
+                    room.getUserAtRoom().add(room.getListRegister().get(i)); // thêm user vào danh sách phòng
+                    room.getContract().inputDayContract(sc, room.getContract()); // Làm hợp động cho user
+                    System.out.println("\t\t\t\t\t\t=======Contract of two Parties========");
+                    System.out.println(room.getContract().toString(room.getListRegister().get(i)));
+                    for (int j = 0; j < manager.getListRoom().size(); j++) {
+                        manager.getListRoom().get(j).getListRegister().remove(room.getListRegister().get(i));
+                    }
+                    break;
+                } else {
+                    if (i == room.getListRegister().size() - 1 && checkFor==0) {
                         System.out.println("not for look User have ID that You Enter !!! ");
                         break endPro;
                     }
                 }
-            if(!room.getListRegister().isEmpty()){
+            }
+            if (!room.getListRegister().isEmpty()) {
                 boolean checkEx1 = true;
                 int choose = 0;
-                while (checkEx1){
-                    try{
+                while (checkEx1) {
+                    try {
                         System.out.println("Do You Want Continue agree for People Olther in List register This Room ? \n 1.Continue \t\t\t 2.Exit ");
                         choose = Integer.parseInt(sc.nextLine());
                         checkEx1 = false;
-                    }catch (Exception ex){
+                    } catch (Exception ex) {
                         System.out.println("You have entered wrong Input data type, please re-enter it");
                     }
                 }
-                switch (choose){
+                switch (choose) {
                     case 1:
                         break;
                     case 2:
@@ -108,13 +113,60 @@ public class RoomModel {
                         System.out.println("..............Back to Sreen Home ....");
                         break endPro;
                 }
-            }else {
+            } else {
                 System.out.println("..............Back to Sreen Home ....");
                 break endPro;
             }
+        }
+    }
+
+    // Phương thức xóa User khỏi phòng
+    public void removeUser(Scanner sc, ManagerHome manager, Room room) {
+        boolean flag = true;
+       endPro: while (flag) {
+            System.out.println("=============list People live in Room " + room.getRoomNumber() + "==========");
+            System.out.println("\t\tfullName\t\t\tAddress\t\tUsername");
+            for (int i = 0; i < room.getUserAtRoom().size(); i++) {
+                System.out.println("\t\t\t" + room.getUserAtRoom().get(i).getFullName() + "\t\t\t" + room.getUserAtRoom().get(i).getAddress() + "\t\t" + room.getUserAtRoom().get(i).getAccount().getUserName());
+            }
+            System.out.println("now enter username of People that You want Remove this Room");
+            String usernamCheck = sc.nextLine();
+            int checkFor = 0;
+            for (int i = 0; i < room.getUserAtRoom().size(); i++) {
+                if (usernamCheck.equals(room.getUserAtRoom().get(i).getAccount().getUserName())) {
+                    room.getUserAtRoom().get(i).setStatusRoom("null");
+                    room.getUserAtRoom().remove(room.getUserAtRoom().get(i));
+                    System.out.println("Remove successful ");
+                    break;
+                } else {
+                    if (i == room.getUserAtRoom().size()- 1 && checkFor == 0)
+                        System.out.println("You Input not vail username of People in Live Room, please Rs Input");
+                }
+            }
+            boolean checkEx = true;
+            int choose = 0;
+            while (checkEx){
+                try{
+                    System.out.println("Do you Want Continue ?? \n 1.Continue  \t\t 2.Exit");
+                    choose = Integer.parseInt(sc.nextLine());
+                    checkEx = false;
+                }catch (Exception ex){
+                    System.out.println("You have entered wrong Input data type, please re-enter it");
+                }
+            }
+            switch (choose){
+                case 1:
+                    break;
+                case 2:
+                    System.out.println("...........Back to home screen");
+                    break endPro;
+                default:
+                    System.out.println("Import Numbers Olther !!!! ");
+                    break;
             }
         }
-
     }
+
+}
 
 

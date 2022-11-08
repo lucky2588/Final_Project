@@ -23,6 +23,8 @@ public class Room {
     public Room(){
         nextRoomNumber++;
         this.roomNumber = nextRoomNumber;
+        Bill bill = new Bill();
+        this.billRoom = bill;
          ArrayList<Renters> listAtRoom = new ArrayList<>();
          ArrayList<Renters> listUserRegister = new ArrayList<>();
          this.listRegister = listUserRegister;
@@ -39,10 +41,6 @@ public class Room {
 
     public void setRankRoom(String rankRoom) {
         this.rankRoom = rankRoom;
-    }
-
-    public void setBillRoom(Bill billRoom) {
-        this.billRoom = billRoom;
     }
 
     public String getDescribeRoom() {

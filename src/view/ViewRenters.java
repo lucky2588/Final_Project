@@ -18,8 +18,8 @@ public class ViewRenters {
             boolean checkEx = true;
             while (checkEx) {
                 try {
-                    System.out.println("1.Change Personal Information\t\t\t\t2.See Information of Manager Home\t\t\t\t3.Look for Room base on Resquett\t\t\t\t4.See list All Room");
-                    System.out.println("\t\t\t 5.Room Registration\t\t\t\t\t6.See Bill of Month \t\t\t\t\t\t7.See Contract \t\t 8.Log Out ");
+                    System.out.println("1.Change Personal Information\t\t\t\t2.See Information of Manager Home\t\t\t\t3.Look for Room base on Resquet\t\t\t\t\t4.See list All Room");
+                    System.out.println("\t\t\t\t\t5.Room Registration\t\t\t\t\t6.See Bill of Month \t\t\t\t\t\t7.See Contract \t\t\t\t\t8.Log Out ");
                     System.out.println("=>> Your Choose");
                     choose = Integer.parseInt(sc.nextLine());
                     checkEx = false;
@@ -52,6 +52,11 @@ public class ViewRenters {
                     System.out.println("...........Back to home screen");
                     break;
                 case 6:
+                    if(user.getStatusRoom().equals("null")){
+                        System.out.println("Please sign up for a room. If approved, you will be able to use this fuction !! ");
+                    }else{
+                            rentersModel.displayBill(sc,user);
+                    }
                     System.out.println("...........Back to home screen");
                     break;
                 case 7:
@@ -152,6 +157,7 @@ public class ViewRenters {
             }
         }
     }
+
 
 
 

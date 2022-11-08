@@ -98,7 +98,7 @@ public class Contract {
                 "\n1.Dat Coc 1 Thang Tien Nha \n2.Thanh Toan Day Du Tien Nha vao mung 5 hang Thang \n3.Giu Gin Do Dac Chung (thang may , cau thang ,...)" +
                 "\n4.O toi thieu it nhat 1 nam ke tu khi lam hop dong"+
                 "\n\n\t\t\t\t=====Chi Phi Dich Vu khi SD phong======"
-                +"\n-Tien Nha : "+getPriceRoom()+"\n-Wifi : 100k/Phong \n-Tien Nuoc : 25k/Khoi \n-Tien Dien : 3.5k/So (Dung Tren 50 So =>> 4k/So)"+
+                +"\n-Tien Nha : "+getPriceRoom()+"00K"+"\n-Wifi : 100k/Phong \n-Tien Nuoc : 25k/Khoi \n-Tien Dien : 3.5k/So (Dung Tren 50 So =>> 4k/So)"+
                 "\n Date have A contract : "+getDayRent()+"\n Date end Contrat : "+getDateEnd()+
                 "\n\n\t\t\t Manager Home \t\t\t\t\t Renters Room "+"\n\t\tNguyen Duc Thang\t\t\t\t"+user.getFullName();
     }

@@ -22,7 +22,7 @@ public class ViewManager {
             while (checkEx) {
                 try {
                     System.out.println("\t\t\t\t\t\t\t\t\t\t\t========Manager Home functions=======");
-                    System.out.println("1.Create,Update,Delete Room\t\t2.Agree The Room Rental\t\t3.See Contract\t\t4.House Revenue of Month\t\t5.Cancel Contract of Renters\t\t6.Log Out ");
+                    System.out.println("1.Create,Watch,Delete Room\t\t2.Agree The Room Rental\t\t3.Remove Renters from Room\t\t4.House Revenue of Month\t\t5.See Contract \t\t6.Log Out ");
                     System.out.println("=>> Your Choose : ");
                     choose = Integer.parseInt(sc.nextLine());
                     checkEx = false;
@@ -40,7 +40,7 @@ public class ViewManager {
                         if (!manager.getListRoom().get(i).getListRegister().isEmpty()) {
                             dangkyPhong(sc, manager, roomModel);
                         } else {
-                            if(i < manager.getListRoom().size()-1)
+                            if (i < manager.getListRoom().size() - 1)
                                 continue;
                             System.out.println("No one register Room of You ");
                         }
@@ -48,6 +48,16 @@ public class ViewManager {
                     System.out.println("...........Back to home screen");
                     break;
                 case 3:
+                    for (int i = 0; i < manager.getListRoom().size(); i++) {
+                        if (!manager.getListRoom().get(i).getUserAtRoom().isEmpty()) {
+                            removeUser(sc, manager, roomModel);
+                        } else {
+                            if (i < manager.getListRoom().size() - 1)
+                                continue;
+                            System.out.println("Your rooms are empty");
+                            System.out.println("Please accept Renters join Room before Use this function !! ");
+                        }
+                    }
                     System.out.println("...........Back to home screen");
                     break;
                 case 4:
@@ -130,7 +140,7 @@ public class ViewManager {
     // Xử lí Case 2 : Chấp nhận cho user join phòng
     public void dangkyPhong(Scanner sc, ManagerHome manager, RoomModel roomModel) {
         System.out.println("List Room have People register .. ");
-        System.out.println("Room\t\t\tList People Register ");
+        System.out.println("Room\t\t\t\t\tList People Register ");
         for (int i = 0; i < manager.getListRoom().size(); i++) { // duyệt phần tử
             if (!manager.getListRoom().get(i).getListRegister().isEmpty())
                 System.out.println(manager.getListRoom().get(i).getRoomNumber() + "\t\t\t\t\t\t" + manager.getListRoom().get(i).getListRegister().size());
@@ -163,7 +173,7 @@ public class ViewManager {
             int choose2 = 0;
             while (checkEx2) {
                 try {
-                    System.out.println("Do You Want Continue ? \n1.Continue \t\t 2.Exit\nInput Here:");
+                    System.out.println("Agree to let people book rooms in other rooms? \n1.Continue \t\t 2.Exit\nInput Here:");
                     choose2 = Integer.parseInt(sc.nextLine());
                     checkEx2 = false;
                 } catch (Exception ex) {
@@ -182,7 +192,64 @@ public class ViewManager {
         }
     }
 
+    // Case 3 : Remove User from Room
+    public void removeUser(Scanner sc, ManagerHome manager, RoomModel roomModel) {
+        boolean flag = true;
+        endPro:
+        while (flag) {
+            System.out.println("ID Room \t\tPeople Live in Room ");
+            for (int i = 0; i < manager.getListRoom().size(); i++) {
+                System.out.println(manager.getListRoom().get(i).getRoomNumber() + "\t\t\t\t" + manager.getListRoom().get(i).getUserAtRoom().size());
+            }
+            boolean checkEx = true;
+            int checkIDroom = 0;
+            while (checkEx) {
+                try {
+                    System.out.println("Import Room have Renters that You want remove from Room,Input here:");
+                    checkIDroom = Integer.parseInt(sc.nextLine());
+                    checkEx = false;
+                } catch (Exception ex) {
+                    System.out.println("You have entered wrong Input data type, please re-enter it");
+                }
+            }
+            int checkFor = 0;
+            for (int i = 0; i < manager.getListRoom().size(); i++){
+                if (checkIDroom == manager.getListRoom().get(i).getRoomNumber()) {
+                    checkFor += 1;
+                    roomModel.removeUser(sc, manager, manager.getListRoom().get(i));
+                    System.out.println("Remove User from Room successful !!! ");
+                    break;
+                } else {
+                    if (i == manager.getListRoom().size() - 1 && checkFor == 0)
+                        System.out.println("No Room have ID that You input !!");
+                }
+            }
+            boolean checkEx2 = true;
+            int choose2 = 0;
+            while (checkEx2) {
+                try {
+                    System.out.println("Do You Want Continue remove People in Room Olther ? \n 1.Continue \t\t 2.Exit \nInput here:");
+                    choose2 = Integer.parseInt(sc.nextLine());
+                    checkEx2 = false;
+                } catch (Exception ex) {
+                    System.out.println("You have entered wrong Input data type, please re-enter it");
+                }
+            }
+            switch (choose2) {
+                case 1:
+                    break;
+                case 2:
+                    System.out.println("...........Back to home screen");
+                    break endPro;
+                default:
+                    System.out.println("Import Numbers Olther !!! ");
+            }
+        }
+    }
 
 }
+
+
+
 
 

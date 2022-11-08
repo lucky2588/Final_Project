@@ -19,19 +19,19 @@ public class Bill {
     }
 
     public double getPrinceElectricity() {
-        return princeElectricity;
+        return this.princeElectricity;
     }
 
     public void setPrinceElectricity(double princeElectricity) {
         if (princeElectricity > 50.0) {
-            this.princeElectricity = (princeElectricity - 50.0) * 4.0 + (50.0 * 3.5);
+            this.princeElectricity = ((princeElectricity - 50.0) * 4.0) + (50.0 * 3.5);
         } else {
             this.princeElectricity = princeElectricity * 3.5;
         }
     }
 
     public double getPrinceWater() {
-        return princeWater;
+        return this.princeWater;
     }
 
     public void setPrinceWater(double princeWater) {
