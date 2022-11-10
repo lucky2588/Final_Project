@@ -1,9 +1,7 @@
 package model;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
-
 public class Contract {
     private int conTractRoom;
     private LocalDate dayRent;
@@ -100,7 +98,7 @@ public class Contract {
                 "\n\n\t\t\t\t=====Chi Phi Dich Vu khi SD phong======"
                 +"\n-Tien Nha : "+getPriceRoom()+"00K"+"\n-Wifi : 100k/Phong \n-Tien Nuoc : 25k/Khoi \n-Tien Dien : 3.5k/So (Dung Tren 50 So =>> 4k/So)"+
                 "\n Date have A contract : "+getDayRent()+"\n Date end Contrat : "+getDateEnd()+
-                "\n\n\t\t\t Manager Home \t\t\t\t\t Renters Room "+"\n\t\tNguyen Duc Thang\t\t\t\t"+user.getFullName();
+                "\n\n\t\tManager Home \t\t\t\tRenters Room "+"\n\t\tNguyen Duc Thang\t\t\t\t"+user.getFullName();
     }
 
 

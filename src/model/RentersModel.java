@@ -2,7 +2,7 @@ package model;
 import java.util.ArrayList;
 import java.util.Scanner;
 public class RentersModel {
-    public RentersModel() {
+    public RentersModel(){
     }
 
     public Renters input(Scanner sc, String username, int cCCD, String password) {
@@ -111,7 +111,7 @@ public class RentersModel {
                         }
                     }
                     user.getRoom().getBillRoom().setPrinceElectricity(numbersElectric);
-                    System.out.println("This month's electricity bill of the Room : " + user.getRoom().getBillRoom().getPrinceElectricity() + "0K");
+                    System.out.println("This month's electricity bill of the Room : " + user.getRoom().getBillRoom().getPrinceElectricity() + "00d");
                     System.out.println("...........Back to home screen");
                     break;
                 case 2:
@@ -127,20 +127,20 @@ public class RentersModel {
                         }
                     }
                     user.getRoom().getBillRoom().setPrinceWater(numbersWater);
-                    System.out.println("This month's Water  bill of the Room : " + user.getRoom().getBillRoom().getPrinceWater() + "0K");
+                    System.out.println("This month's Water  bill of the Room : " + user.getRoom().getBillRoom().getPrinceWater() + "00d");
                     System.out.println("...........Back to home screen");
                     break;
                 case 3:
-                    if (user.getRoom().getBillRoom().getPrinceWater() == 0 && user.getRoom().getBillRoom().getPrinceElectricity() == 0) {
+                    if (user.getRoom().getBillRoom().getPrinceWater() == 0.0 && user.getRoom().getBillRoom().getPrinceElectricity() == 0) {
                         System.out.println("Enter 2 electricity and water bills before using this function ");
-                    } else {
+                    }else{
                         System.out.println("============Bill of Month============");
                         System.out.println("Room " + user.getRoom().getRoomNumber());
-                        System.out.println("Service prices\t\t\t Value");
-                        System.out.println("Room\t\t\t" + user.getRoom().getPrinceRoom() + "00K");
-                        System.out.println("Electricity\t\t" + user.getRoom().getBillRoom().getPrinceElectricity() + "K");
-                        System.out.println("Water\t\t\t" + user.getRoom().getBillRoom().getPrinceWater() + "K");
-                        System.out.println("Internet\t\t 100K");
+                        System.out.println("Service prices\t\tValue");
+                        System.out.println("Room\t\t\t " + user.getRoom().getPrinceRoom()+"000.000d");
+                        System.out.println("Electricity\t\t  " + user.getRoom().getBillRoom().getPrinceElectricity() + "0d");
+                        System.out.println("Water\t\t\t  " + user.getRoom().getBillRoom().getPrinceWater() + "0d");
+                        System.out.println("Internet\t\t  100.000d");
                     }
                     break;
                 case 4:

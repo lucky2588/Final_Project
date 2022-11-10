@@ -9,6 +9,7 @@ public class ViewRenters {
         RoomModel roomModel = new RoomModel();
         ManagerHomeModel managerHomeModel = new ManagerHomeModel();
         System.out.println("....Please Wait for us a moment");
+        System.out.println("Log in successful !!! ");
         System.out.println("Welcome " + user.getFullName());
         System.out.println("You Are logged in as User");
         boolean flag = true;
@@ -18,7 +19,7 @@ public class ViewRenters {
             boolean checkEx = true;
             while (checkEx) {
                 try {
-                    System.out.println("1.Change Personal Information\t\t\t\t2.See Information of Manager Home\t\t\t\t3.Look for Room base on Resquet\t\t\t\t\t4.See list All Room");
+                    System.out.println("1.Change Personal Information\t\t\t\t2.See Information of Manager Home\t\t\t\t3.Look for Room base on Resquet\t\t\t\t\t4.Look For a Shared Room");
                     System.out.println("\t\t\t\t\t5.Room Registration\t\t\t\t\t6.See Bill of Month \t\t\t\t\t\t7.See Contract \t\t\t\t\t8.Log Out ");
                     System.out.println("=>> Your Choose");
                     choose = Integer.parseInt(sc.nextLine());
@@ -38,10 +39,30 @@ public class ViewRenters {
                     System.out.println("...........Back to home screen");
                     break;
                 case 3: // Chức năng tìm phòng theo yêu cầu
+                    if(roomModel.checkRoomEmpty(manager)){
                     managerHomeModel.displayRoom(sc, manager);
+                    }else {
+                        System.out.println("No rooms have been added by Manager Home ");
+                        System.out.println("...........Back to home screen");
+                    }
                     break;
                 case 4:
+                    if(roomModel.checkRoomEmpty(manager)){
+                    int checkForcase4 =0;
+                    for (int i = 0; i <manager.getListRoom().size();i++){
+                        if(!manager.getListRoom().get(i).getUserAtRoom().isEmpty()){
+                            checkForcase4+=1;
+                            managerHomeModel.listRoom(sc,manager);
+                        }else {
+                            if(checkForcase4 ==0 && i == manager.getListRoom().size()-1)
+                                System.out.println("All of Room is Empty people ");
+                        }
+                    }
                     System.out.println("...........Back to home screen");
+                    }else {
+                        System.out.println("No rooms have been added by Manager Home ");
+                        System.out.println("...........Back to home screen");
+                    }
                     break;
                 case 5:
                     if (user.getStatusRoom().equals("null")) {
@@ -60,6 +81,11 @@ public class ViewRenters {
                     System.out.println("...........Back to home screen");
                     break;
                 case 7:
+                    if (user.getStatusRoom().equals("null")) {
+                        System.out.println("Please sign up for a room. If approved, you will be able to use this fuction !! ");
+                    } else {
+                       roomModel.seeContract(user.getRoom(),user);
+                    }
                     System.out.println("...........Back to home screen");
                     break;
                 case 8:
@@ -91,8 +117,16 @@ public class ViewRenters {
         endPro:switch (choose) {
             case 1:
                 int idRoom = 0;
-                System.out.println("Input Number Room that You Want register in here:");
-                idRoom = Integer.parseInt(sc.nextLine());
+                boolean checkExxxx = true;
+                while (checkExxxx){
+                    try{
+                        System.out.println("Input Number Room that You Want register in here:");
+                        idRoom = Integer.parseInt(sc.nextLine());
+                        checkExxxx = false;
+                    }catch (Exception ex){
+                        System.out.println("You have entered wrong Input data type, please re-enter it");
+                    }
+                }
                 for (int i = 0; i < manager.getListRoom().size(); i++){
                     if (idRoom == manager.getListRoom().get(i).getRoomNumber() && manager.getListRoom().get(i).getUserAtRoom().size() < 3){
                         if(roomModel.checkListRegister(user,manager.getListRoom().get(i))){

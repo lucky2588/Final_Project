@@ -4,7 +4,7 @@ import view.ViewMain;
 import java.util.ArrayList;
 import java.util.Scanner;
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args){
         Scanner sc = new Scanner(System.in);
         ArrayList<Person> listUser = new ArrayList<>();
         ArrayList<ManagerHome> listManager = new ArrayList<>();

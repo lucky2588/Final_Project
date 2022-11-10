@@ -2,7 +2,6 @@ package view;
 import model.ManagerHome;
 import model.Person;
 import model.PersonModel;
-
 import java.util.ArrayList;
 import java.util.Scanner;
 public class ViewAdmin{

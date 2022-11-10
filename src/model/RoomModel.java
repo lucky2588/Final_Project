@@ -1,12 +1,9 @@
 package model;
-
 import java.util.ArrayList;
 import java.util.Scanner;
-
 public class RoomModel {
     public RoomModel() {
     }
-
     public void creatRoom(Scanner sc, Room room) {
         double areaRoom = 0.0;
         String rankRoom = "";
@@ -49,15 +46,22 @@ public class RoomModel {
     }
 
     // Phương thức thêm mới 1 user vào phòng
-    public void addRegisterJoinRoom(Scanner sc, ManagerHome manager, Room room) {
+    public void addRegisterJoinRoom(Scanner sc, ManagerHome manager, Room room){
+
         boolean flag = true;
         int checkCCCD = 0;
         endPro:
         while (flag) {
+            if(room.getUserAtRoom().size() ==3){
+                room.getListRegister().clear();
+                System.out.println("This Room have three People , so No one will be able to add anyone to this room from the registration list anymore ");
+                System.out.println("List Register of This Room is Clear ");
+                break endPro;
+            }
             System.out.println("======List People Register this Room=====");
-            System.out.println("fullName \t\t\t Username \t\t\tCCCD");
+            System.out.println("fullName \t\tUsername\t\t CCCD");
             for (int i = 0; i < room.getListRegister().size(); i++) {
-                System.out.println(room.getListRegister().get(i).getFullName() + "\t\t\t\t" + room.getListRegister().get(i).getAccount().getUserName() + "\t\t\t\t\t" + room.getListRegister().get(i).getcCCD());
+                System.out.println(room.getListRegister().get(i).getFullName() + "\t\t\t\t" + room.getListRegister().get(i).getAccount().getUserName()+"\t\t\t "+room.getListRegister().get(i).getcCCD());
             }
             boolean checkEx = true;
             while (checkEx) {
@@ -70,7 +74,7 @@ public class RoomModel {
                 }
             }
                 int checkFor = 0;
-            for (int i = 0; i < room.getListRegister().size(); i++) {
+            for (int i = 0; i < room.getListRegister().size(); i++){
                 if (checkCCCD == room.getListRegister().get(i).getcCCD()){
                     checkFor+=1;
                     room.getListRegister().get(i).setRoom(room); // set phòng cho user
@@ -81,9 +85,7 @@ public class RoomModel {
                     room.getContract().inputDayContract(sc, room.getContract()); // Làm hợp động cho user
                     System.out.println("\t\t\t\t\t\t=======Contract of two Parties========");
                     System.out.println(room.getContract().toString(room.getListRegister().get(i)));
-                    for (int j = 0; j < manager.getListRoom().size(); j++) {
-                        manager.getListRoom().get(j).getListRegister().remove(room.getListRegister().get(i));
-                    }
+                    romoveUserfromList(room.getListRegister().get(i),manager); // Xóa tất cả thằng user có mặt ở phòng chờ khác
                     break;
                 } else {
                     if (i == room.getListRegister().size() - 1 && checkFor==0) {
@@ -114,6 +116,7 @@ public class RoomModel {
                         break endPro;
                 }
             } else {
+                System.out.println("The registration list of the room has expired");
                 System.out.println("..............Back to Sreen Home ....");
                 break endPro;
             }
@@ -121,13 +124,13 @@ public class RoomModel {
     }
 
     // Phương thức xóa User khỏi phòng
-    public void removeUser(Scanner sc, ManagerHome manager, Room room) {
+    public void removeUser(Scanner sc, ManagerHome manager, Room room){
         boolean flag = true;
        endPro: while (flag) {
             System.out.println("=============list People live in Room " + room.getRoomNumber() + "==========");
             System.out.println("\t\tfullName\t\t\tAddress\t\tUsername");
-            for (int i = 0; i < room.getUserAtRoom().size(); i++) {
-                System.out.println("\t\t\t" + room.getUserAtRoom().get(i).getFullName() + "\t\t\t" + room.getUserAtRoom().get(i).getAddress() + "\t\t" + room.getUserAtRoom().get(i).getAccount().getUserName());
+            for (int i = 0; i < room.getUserAtRoom().size(); i++){
+                System.out.println("\t\t\t" + room.getUserAtRoom().get(i).getFullName() + "\t\t\t  " + room.getUserAtRoom().get(i).getAddress() + "\t\t\t " + room.getUserAtRoom().get(i).getAccount().getUserName());
             }
             System.out.println("now enter username of People that You want Remove this Room");
             String usernamCheck = sc.nextLine();
@@ -143,11 +146,14 @@ public class RoomModel {
                         System.out.println("You Input not vail username of People in Live Room, please Rs Input");
                 }
             }
+            if(room.getUserAtRoom().isEmpty()){
+                break endPro;
+            }
             boolean checkEx = true;
             int choose = 0;
             while (checkEx){
                 try{
-                    System.out.println("Do you Want Continue ?? \n 1.Continue  \t\t 2.Exit");
+                    System.out.println("Do you Want Continue Remove People live in This Room ?? \n 1.Continue  \t\t 2.Exit");
                     choose = Integer.parseInt(sc.nextLine());
                     checkEx = false;
                 }catch (Exception ex){
@@ -166,6 +172,29 @@ public class RoomModel {
             }
         }
     }
+// Xử lí Case 7 của Sreen Main User
+    public void seeContract(Room room, Renters user){
+        System.out.println(room.getContract().toString(user));
+    }
+// Xét Phòng Rỗng hay không
+    public boolean checkRoomEmpty(ManagerHome manager){
+        if(!manager.getListRoom().isEmpty()){
+            return true;
+        }
+        return false;
+    }
+    // Xóa User khỏi danh sách hàng đợi
+    public void romoveUserfromList(Renters user,ManagerHome manager){
+        for (int i = 0; i <manager.getListRoom().size() ; i++){
+            for (int j = 0; j <manager.getListRoom().get(i).getListRegister().size();j++){
+                if(manager.getListRoom().get(i).getListRegister().get(j) ==user) {
+                    manager.getListRoom().get(i).getListRegister().remove(manager.getListRoom().get(i).getListRegister().get(j));
+                }
+            }
+            }
+        }
+
+
 
 }
 
