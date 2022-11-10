@@ -16,8 +16,9 @@ public class ViewManager {
             boolean checkEx = true;
             while (checkEx) {
                 try {
-                    System.out.println("\t\t\t\t\t\t\t\t\t\t\t========Manager Home functions=======");
-                    System.out.println("1.Create,Watch,Delete Room\t\t2.Agree The Room Rental\t\t3.Remove Renters from Room\t\t4.House Revenue of Month\t\t5.See Contract \t\t6.Log Out ");
+                    System.out.println("\t\t\t\t\t\t\t\t\t\t\t\t\t\t========Manager Home functions=======");
+                    System.out.println();
+                    System.out.println("1.Create, Delete Room\t\t2.Agree The Room Rental\t\t3.Remove Renters from Room\t\t4.House Revenue of Month\t\t5.See List Room \t\t6.Log Out ");
                     System.out.println("=>> Your Choose : ");
                     choose = Integer.parseInt(sc.nextLine());
                     checkEx = false;
@@ -31,22 +32,27 @@ public class ViewManager {
                     System.out.println("...........Back to home screen");
                     break;
                 case 2:
-                    int checkResgiar = 0;
-                    for (int i = 0; i < manager.getListRoom().size(); i++){
-                        if (!manager.getListRoom().get(i).getListRegister().isEmpty()){
-                            checkResgiar+=1;
-                            dangkyPhong(sc, manager, roomModel);
-                        } else {
-                            if (i < manager.getListRoom().size() - 1)
-                                continue;
-                            if(i == manager.getListRoom().size()-1 && checkResgiar ==0) {
-                                System.out.println("No one register Room of You ");
+                    if(!manager.getListRoom().isEmpty()){
+                        int checkResgiar = 0;
+                        for (int i = 0; i < manager.getListRoom().size(); i++) {
+                            if (!manager.getListRoom().get(i).getListRegister().isEmpty()) {
+                                checkResgiar += 1;
+                                dangkyPhong(sc, manager, roomModel);
+                            } else {
+                                if (i < manager.getListRoom().size() - 1)
+                                    continue;
+                                if (i == manager.getListRoom().size() - 1 && checkResgiar == 0) {
+                                    System.out.println("No one register Room of You ");
+                                }
                             }
                         }
+                    }else {
+                        System.out.println("No Room in List Room of You , Create Room before Use  this fuction ");
                     }
                     System.out.println("...........Back to home screen");
                     break;
                 case 3:
+                    if(!manager.getListRoom().isEmpty()){
                     for (int i = 0; i < manager.getListRoom().size(); i++) {
                         if (!manager.getListRoom().get(i).getUserAtRoom().isEmpty()){
                             removeUser(sc, manager, roomModel);
@@ -57,21 +63,50 @@ public class ViewManager {
                             System.out.println("Please accept Renters join Room before Use this function !! ");
                         }
                     }
+                    }else {
+                        System.out.println("No Room in List Room of You , Create Room before Use  this fuction ");
+                    }
                     System.out.println("...........Back to home screen");
                     break;
                 case 4:
-                    for (int i = 0; i < manager.getListRoom().size(); i++){
-                        if (!manager.getListRoom().get(i).getUserAtRoom().isEmpty()) {
-                            removeUser(sc, manager, roomModel);
-                        } else {
-                            if (i < manager.getListRoom().size() - 1)
-                                continue;
-                            System.out.println("No sales Because Your rooms are empty ");
+                    if(!manager.getListRoom().isEmpty()){
+                        int checkForCase4 = 0;
+                        for (int i = 0; i < manager.getListRoom().size(); i++) {
+                            if (!manager.getListRoom().get(i).getUserAtRoom().isEmpty()){
+                                checkForCase4+=1;
+                                roomModel.revenueHome(manager);
+                            } else {
+                                if (i < manager.getListRoom().size() - 1)
+                                    continue;
+                                if(i == manager.getListRoom().size()-1 && checkForCase4==0){
+                                    System.out.println("No sales Because Your rooms are empty ");
+                                }
+                            }
                         }
+                    }else {
+                        System.out.println("No Room in List Room of You , Create Room before Use  this fuction ");
                     }
                     System.out.println("...........Back to home screen");
                     break;
                 case 5:
+                    if(!manager.getListRoom().isEmpty()) {
+                        int checkForCase5=0;
+                        for (int i = 0; i < manager.getListRoom().size(); i++) {
+                            if (!manager.getListRoom().get(i).getUserAtRoom().isEmpty()){
+                                checkForCase5+=1;
+                                roomModel.showRoom(manager);
+                            } else {
+                                if (i < manager.getListRoom().size() - 1)
+                                    continue;
+                                if(i == manager.getListRoom().size()-1 && checkForCase5==0) {
+                                    System.out.println("Your rooms are empty");
+                                    System.out.println("Please accept Renters join Room before Use this function !! ");
+                                }
+                                }
+                        }
+                    }else {
+                        System.out.println("No Room in List Room of You , Create Room before Use  this fuction ");
+                    }
                     System.out.println("...........Back to home screen");
                     break;
                 case 6:
@@ -93,7 +128,7 @@ public class ViewManager {
             boolean checkEx = true;
             while (checkEx) {
                 try {
-                    System.out.println("What function Do You want to perform? \n1.Create A Room new \t\t2.Update Room \t\t3.Delete Room \t\t4.Exit\nImport Here:");
+                    System.out.println("What function Do You want to perform? \n1.Create A Room new \t\t2.Delete Room\t\t3.Exit\nImport Here:");
                     choose = Integer.parseInt(sc.nextLine());
                     checkEx = false;
                 } catch (Exception ex) {
@@ -132,18 +167,23 @@ public class ViewManager {
                     }
                     break;
                 case 2:
+                    if(!manager.getListRoom().isEmpty()){
+
+                    }else {
+                        System.out.println("No Room in List Room of You , Create Room before Use  this fuction ");
+                    }
                     break;
                 case 3:
-                    break;
-                case 4:
+                    System.out.println("...........Back to home screen");
                     break endPro;
                 default:
                     System.out.println("Import numbers Olther !!! ");
             }
         }
     }
-    //Xử lí case 1.2 : Update Room
-    // xử lí Case 1.3 : Xóa Room
+
+    // xử lí Case 1.2 : Xóa Room
+
 
     // Xử lí Case 2 : Chấp nhận cho user join phòng
     public void dangkyPhong(Scanner sc, ManagerHome manager, RoomModel roomModel) {

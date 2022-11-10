@@ -39,4 +39,7 @@ public class Renters extends Person{
     public String toString() {
         return "\n-Username: "+ getAccount().getUserName()+"\t -CCCD: "+getcCCD()+"\t FullName: "+getFullName();
     }
+    public String toString2(){
+        return "fullName : "+getFullName()+"\t\t-NumberPhone : "+getNumberPhone()+"\t\t\t-CCCD/ID : "+getcCCD();
+    }
 }
