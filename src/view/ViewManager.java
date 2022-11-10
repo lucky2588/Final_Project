@@ -135,7 +135,7 @@ public class ViewManager {
                     System.out.println("You have entered wrong Input data type, please re-enter it");
                 }
             }
-            switch (choose) {
+            switch (choose){
                 case 1:
                     boolean flag = true;
                     endPro1:
@@ -154,7 +154,7 @@ public class ViewManager {
                                 System.out.println("You have entered wrong Input data type, please re-enter it");
                             }
                         }
-                        switch (chooseCase1) {
+                        switch (chooseCase1){
                             case 1:
                                 break;
                             case 2:
@@ -168,7 +168,7 @@ public class ViewManager {
                     break;
                 case 2:
                     if(!manager.getListRoom().isEmpty()){
-
+                         roomModel.removeRoom(sc,manager,roomModel);
                     }else {
                         System.out.println("No Room in List Room of You , Create Room before Use  this fuction ");
                     }

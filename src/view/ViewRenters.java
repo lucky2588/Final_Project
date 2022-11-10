@@ -65,10 +65,14 @@ public class ViewRenters {
                     }
                     break;
                 case 5:
-                    if (user.getStatusRoom().equals("null")) {
-                        registerRoom(sc, manager, user,roomModel);
-                    } else {
-                        System.out.println("You already have a room, if you want to book another room, please cancel the contract with the current room ");
+                    if(!manager.getListRoom().isEmpty()) {
+                        if (user.getStatusRoom().equals("null")) {
+                            registerRoom(sc, manager, user, roomModel);
+                        }else{
+                            System.out.println("You already have a room, if you want to book another room, please cancel the contract with the current room ");
+                        }
+                    }else {
+                        System.out.println("No rooms have been added by Manager Home ");
                     }
                     System.out.println("...........Back to home screen");
                     break;

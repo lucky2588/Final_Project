@@ -236,6 +236,10 @@ public class RoomModel {
             boolean checkEx = true;
             while (checkEx){
                 try {
+                    System.out.println("ID Room \t\t\t Numbers People");
+                    for (int i = 0; i <manager.getListRoom().size() ; i++) {
+                        System.out.println(manager.getListRoom().get(i).getRoomNumber()+"\t\t\t\t\t\t"+manager.getListRoom().get(i).getUserAtRoom().size());
+                    }
                     System.out.println("import ID of Room that You Want Remove / Delete , input here:");
                     choose = Integer.parseInt(sc.nextLine());
                     checkEx = false;
